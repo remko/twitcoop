@@ -234,7 +234,7 @@ class TwitCoopWindow : public QMainWindow {
 		}
 
 		bool isTweetBoxVisible() const {
-			return showTweetBoxAction->isChecked();
+			return showTweetBoxAction->isChecked() || web->url().path().endsWith("compose_reply");
 		}
 	
 	private:
