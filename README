@@ -1,0 +1,5 @@
+TwitCoop
+--------
+To build, run:
+   qmake
+   make (or nmake on Windows)

@@ -1,0 +1,13 @@
+[Desktop Entry]
+
+# Desktop Entry specification version
+Version=1.0
+
+Type=Application
+Name=TwitCoop
+GenericName=Twitter client
+Comment=Desktop interface for the Twitter Mobile Web interface
+Icon=twitcoop
+Exec=twitcoop
+Terminal=false
+Categories=Network;Qt;

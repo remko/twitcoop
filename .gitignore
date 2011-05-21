@@ -1,0 +1,9 @@
+Makefile*
+debug/
+release/
+twitcoop
+qrc_*
+*.moc
+*.o
+*.pdb
+*~
