@@ -19,6 +19,7 @@ static const QString ORGANIZATION_NAME = QString("El Tramo");
 
 static const int REFRESH_TIME_SECONDS = 60;
 static const int CHECK_NEEDS_UPDATE_SECONDS = 10;
+static const int RELOAD_ON_ERROR_SECONDS = 10;
 
 class CookieJar : public QNetworkCookieJar {
 	public:
@@ -102,8 +103,8 @@ class TwitCoopWindow : public QMainWindow {
 			connect(web, SIGNAL(loadStarted()), SLOT(handleLoadStarted()));
 			connect(web, SIGNAL(loadFinished(bool)), SLOT(handleLoadFinished(bool)));
 			connect(web, SIGNAL(loadProgress(int)), SLOT(handleLoadProgress(int)));
-			web->setUrl(QUrl("http://mobile.twitter.com/session"));
 			widgetStack->addWidget(web);
+			web->setUrl(QUrl("http://mobile.twitter.com/session"));
 
 			tray = new QSystemTrayIcon(QIcon(":/twitter-blue.png"), this);
 			mainMenu = new QMenu(APPLICATION_NAME, this);
@@ -153,15 +154,29 @@ class TwitCoopWindow : public QMainWindow {
 			}
 		}
 
+		void reload() {
+			web->setUrl(web->url());
+		}
+
 		void handleLoadStarted() {
 			QApplication::setOverrideCursor(QCursor(Qt::BusyCursor));
+
+			statusBar()->clearMessage();
+			statusBar()->hide();
 		}
 
 		void handleLoadProgress(int) {
 			updateTweetBoxVisibility();
 		}
 
-		void handleLoadFinished(bool) {
+		void handleLoadFinished(bool ok) {
+			if (!ok) {
+				statusBar()->showMessage("Connection error. Retrying ...");
+				statusBar()->show();
+				QTimer::singleShot(RELOAD_ON_ERROR_SECONDS*1000, this, SLOT(reload()));
+				return;
+			}
+
 			updateTweetBoxVisibility();
 			QWebElement head = web->page()->mainFrame()->documentElement().findFirst("head");
 			if (!head.isNull()) {
