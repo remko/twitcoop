@@ -3,6 +3,7 @@ debug/
 release/
 twitcoop
 qrc_*
+moc_*
 *.moc
 *.o
 *.pdb

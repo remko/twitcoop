@@ -21,4 +21,5 @@ unix {
 
 RC_FILE = TwitCoop.rc
 RESOURCES = TwitCoop.qrc
-SOURCES += TwitCoop.cpp
+HEADERS += flickcharm.h
+SOURCES += TwitCoop.cpp flickcharm.cpp

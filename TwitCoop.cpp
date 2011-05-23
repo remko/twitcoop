@@ -14,6 +14,8 @@
 #include <QtGui>
 #include <QtWebKit>
 
+#include "flickcharm.h"
+
 static const QString APPLICATION_NAME = QString("TwitCoop");
 static const QString ORGANIZATION_NAME = QString("El Tramo");
 
@@ -105,6 +107,7 @@ class TwitCoopWindow : public QMainWindow {
 			connect(web, SIGNAL(loadProgress(int)), SLOT(handleLoadProgress(int)));
 			widgetStack->addWidget(web);
 			web->setUrl(QUrl("http://mobile.twitter.com/session"));
+			flickCharm.activateOn(web);
 
 			tray = new QSystemTrayIcon(QIcon(":/twitter-blue.png"), this);
 			mainMenu = new QMenu(APPLICATION_NAME, this);
@@ -262,6 +265,7 @@ class TwitCoopWindow : public QMainWindow {
 		}
 
 	private:
+		FlickCharm flickCharm;
 		QSettings* settings;
 		QSystemTrayIcon* tray;
 		QStackedWidget* widgetStack;
