@@ -4,9 +4,11 @@
 
 A standalone application to access the Twitter Mobile Web interface.
 
-*Update: The mobile Twitter website was updated, and doesn't work as well 
-anymore with TwitCoop. I will try to upgrade TwitCoop to work with the new
-interface, but it is currently not clear whether this is at all possible.*
+**Update: The mobile Twitter website was updated, and doesn't work 
+anymore with TwitCoop. I was not able to easily fix this, and no longer have
+the time or need for it, so this project is therefore abandoned.  
+An alternative on Mac OS X is to use FluidApp and use an iOS iPhone user agent, which has
+the same effect that this application used to have.**
 
 Features include:
 
